@@ -1,0 +1,119 @@
+﻿@model Bovino.Web.UI.ViewModels.BovinoViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h3>Consulta de Bovinos</h3>
+<hr />
+
+<div class="row">
+    <div class="card-body">
+        <div class="">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row">
+                    <div class="col-md-4 ">
+                        <label asp-for="Nome" class="control-label"></label>
+                        <input asp-for="Nome" class="form-control" />
+                        <span asp-validation-for="Nome" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <label asp-for="Brinco" class="control-label"></label>
+                        <input asp-for="Brinco" class="form-control" />
+                        <span asp-validation-for="Brinco" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <label asp-for="Situacao" class="control-label"></label>
+                        <select asp-for="Situacao" class="form-control" asp-items="Html.GetEnumSelectList<Situacao>()"></select>
+                        <span asp-validation-for="Situacao" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <label asp-for="Sexo" class="control-label"></label>
+                        <select asp-for="Sexo" class="form-control" asp-items="Html.GetEnumSelectList<Sexo>()"></select>
+                        <span asp-validation-for="Sexo" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <label asp-for="BrincoMae" class="control-label"></label>
+                        <input asp-for="BrincoMae" class="form-control" />
+                        <span asp-validation-for="BrincoMae" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <label asp-for="BrincoPai" class="control-label"></label>
+                        <input asp-for="BrincoPai" class="form-control" />
+                        <span asp-validation-for="BrincoPai" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <label asp-for="Raca" class="control-label"></label>
+                        <select asp-for="Raca" class="form-control" asp-items="Html.GetEnumSelectList<Raca>()"></select>
+                        <span asp-validation-for="Raca" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <label asp-for="DataNascimento" class="control-label"></label>
+                        <input asp-for="DataNascimento" type="date" class="form-control" />
+                        <span asp-validation-for="DataNascimento" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4 sexoFeminino">
+                        <label asp-for="DataPrenhe" class="control-label"></label>
+                        <input asp-for="DataPrenhe" type="date"  onblur="AddMonths()" class="form-control" />
+                        <span asp-validation-for="DataPrenhe" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4 sexoFeminino">
+                        <label asp-for="DataProxNasc" class="control-label"></label>
+                        <input asp-for="DataProxNasc" type="date" class="form-control" disabled />
+                        <span asp-validation-for="DataProxNasc" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4 sexoFeminino">
+                        <label asp-for="DataUltimoParto" class="control-label"></label>
+                        <input asp-for="DataUltimoParto"type="date" class="form-control" />
+                        <span asp-validation-for="DataUltimoParto" class="text-danger"></span>
+                    </div/>
+                </div>
+                  <br />
+                <hr />
+              
+                <div class="row" style="text-align: right">
+                    <div>
+                        <button type="submit" class="btn btn-primary">Cadastrar Bovino</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('input').attr('autocomplete', 'off');
+
+            ValidaSexo($('select[Name="@nameof(Model.Sexo)"]'));
+        });
+
+        $('select[Name="@nameof(Model.Sexo)"]').change(function() {
+            ValidaSexo($(this));
+        });
+
+        function ValidaSexo(obj) {
+            var sexo = obj.val();
+            if (sexo == '@((int)Sexo.FEMEA)') {
+                $('.sexoFeminino').show();
+            }
+            else {
+                $('.sexoFeminino').hide();
+            }
+        }
+
+        function AddMonths() {
+            var data = $('input[Name="@nameof(Model.DataPrenhe)"]').val();
+            alert(data);
+            var aux = new Date(data);
+            aux.setMonth(aux.getMonth()+9);
+            alert(aux.toISOString().split('T')[0])
+           $('input[Name="@nameof(Model.DataProxNasc)"]').val(aux.toISOString().split('T')[0]);
+        }
+    </script>
+}
+

@@ -1,7 +1,16 @@
+using Bovino.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.StartupEntity(builder.Configuration);
+
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+ConfigurationHelper.Configuration = builder.Configuration;
+ConfigurationHelper.Services = builder.Services;
 
 var app = builder.Build();
 
@@ -22,6 +31,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Bovino}/{action=Index}/{id?}");
 
 app.Run();

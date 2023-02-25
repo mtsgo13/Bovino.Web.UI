@@ -1,0 +1,114 @@
+﻿@model IEnumerable<Bovino.Web.UI.ViewModels.BovinoViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h3>Consulta de Bovinos</h3>
+<hr />
+<div class="row">
+    <div class="col-md-4 ">
+        <label class="control-label">Paramtro 1</label>
+        <input  class="form-control" />
+    </div>
+    <div class="col-md-4">
+        <label  class="control-label">Parametro 2</label>
+        <input class="form-control" />
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div style="text-align:right">
+        <a class="btn btn-primary" asp-action="Create">Novo Bovino</a>
+    </div>
+</div>
+<br />
+<div class="table-responsive">
+    <table class="table">
+        <thead class="table-primary">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Brinco)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Situacao)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Sexo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BrincoMae)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BrincoPai)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Raca)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataNascimento)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataPrenhe)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataProxNasc)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataUltimoParto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Brinco)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Situacao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Sexo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BrincoMae)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BrincoPai)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Raca)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataNascimento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataPrenhe)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataProxNasc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataUltimoParto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
